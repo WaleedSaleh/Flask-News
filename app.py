@@ -8,13 +8,17 @@ url = ('https://newsapi.org/v2/top-headlines?'
        'apiKey=16016d749e704781988e56c4f384df07')
 
 
-@app.route('/')
-def index():
+def get_data():
     res = r.get(url)
     data = res.json()
     data = data['articles']
-    return render_template('index.html', data=data)
+    return data
 
+
+@app.route('/')
+def index():
+    data = get_data()
+    return render_template('index.html', data=data)
 
 
 if __name__ == '__main__':
